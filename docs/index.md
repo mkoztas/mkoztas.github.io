@@ -2,7 +2,7 @@
 
 **Pamukkale Üniversitesi Fen Bilimleri Enstitüsü**  
 *İnşaat Mühendisliği Anabilim Dalı / Hidrolik Bilim Dalı*  
-**Uzmanlık:** Sürdürülebilirlik Yönetimi & SPK Lisanslı Gayrimenkul Değerleme Uzmanı  
+**Uzmanlık:** Sürdürülebilirlik Yönetimi & SPK Lisanslı Gayrimenkul Değerleme  
 
 ---
 
