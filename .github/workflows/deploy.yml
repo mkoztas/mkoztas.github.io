@@ -1,0 +1,29 @@
+name: GitHub Pages Otomatik Yayınlama
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Python Kurulumu
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+
+      - name: MkDocs Material Yükleme
+        run: |
+          pip install mkdocs-material
+
+      - name: Sitemi Derle ve Yayınla
+        run: |
+          mkdocs gh-deploy --force
