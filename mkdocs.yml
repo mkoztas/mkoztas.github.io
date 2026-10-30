@@ -52,6 +52,7 @@ nav:
       - Tez Çalışması: docs/tez.md
       - Literatür Özeti: docs/literatur.md
   - Veri Analizi ve Kodlar:
-      - Mann-Kendall ve Sen Slope: docs/kodlar/mann-kendall.md
+      - Trend ve Kırılma Analizi: docs/kodlar/trend-analizi.md
       - Pre-Whitening (TFPW): docs/kodlar/pre-whitening.md
+      - Google Colab Analiz Alanı: docs/kodlar/colab-analiz.md
   - İndirilebilir Materyaller: docs/indirmeler.md
