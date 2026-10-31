@@ -1,4 +1,5 @@
-# Mustafa Kerem Öztaş Web sitesi: [Resilience Shift](https://oztas.rs)
+# Mustafa Kerem Öztaş 
+Web sitesi: [Resilience Shift](https://oztas.rs) >> oztas.rs <<
 
 **Pamukkale Üniversitesi Fen Bilimleri Enstitüsü**  
 *İnşaat Mühendisliği Hidrolik Anabilim Dalı*
