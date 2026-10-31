@@ -1,8 +1,8 @@
 # Mustafa Kerem Öztaş 
 Web sitesi: [Resilience Shift](https://oztas.rs) >> oztas.rs <<
 
-**Pamukkale Üniversitesi Fen Bilimleri Enstitüsü**  
-*İnşaat Mühendisliği Hidrolik Anabilim Dalı Prof Dr Ülker GÜNER*
+**Pamukkale Üniversitesi Fen Bilimleri Enstitüsü İnşaat Mühendisliği**
+*Hidrolik Anabilim Dalı Prof Dr Ülker GÜNER*
 
 Tez Konusu: "İklim Değişikliğinin Farklı Süreli Yağış ve Sıcaklık Parametreleriyle Değerlendirilmesi"
 
