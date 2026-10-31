@@ -13,8 +13,8 @@ Web sitesi: [Resilience Shift](https://oztas.rs) >> oztas.rs <<
 - **Döngüsel Ekonomi:** Yaşam Döngüsü Analizi (LCA / ISO 14040), EPD süreçleri ve kaynak verimliliği
 -->
 ---
-```
 ## 🌊 Anahtar Kelimeler
+```
 - **İklim Değişikliği:** Farklı süreli yağış ve sıcaklık zaman serileri trend analizleri (Marmara Bölgesi Örneği)
 - **Hidro-Meteoroloji:** Otokorelasyon düzeltmeli non-parametrik testler (Modified Mann-Kendall, Sen's Slope, Yenilikçi Şen Yöntemi - ITA)
 - **Ekstrem Olaylar ve Kırılma Analizi:** TFPW Pre-whitening, Sequential Mann-Kendall (SQMK) ve durağan olmayan (Non-Stationary) GEV dağılımları
