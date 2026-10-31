@@ -25,18 +25,21 @@ theme:
     - navigation.tabs
     - navigation.sections
     - navigation.top
-    - content.code.copy
+    - content.tabs.link       # Sekme geçişlerini tüm sayfada senkronize eder
+    - content.code.copy       # Kod kopyalama butonu ekler
     - content.code.annotate
 
 plugins:
   - search
-
+    
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
-  - pymdownx.superfences
+  - pymdownx.superfences      # Kod blokları için gerekli
+  - pymdownx.tabbed:
+      alternate_style: true   # Modern sekme görünümü sağlar
   - pymdownx.arithmatex:
       generic: true
   - attr_list
