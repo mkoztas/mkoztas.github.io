@@ -1,4 +1,4 @@
-site_name: Mustafa Kerem Öztaş | Akademik Portfolyo
+site_name: Mustafa Kerem Öztaş | Portfolyo
 site_description: İklim Değişikliği, Hidro-Meteoroloji ve Su Kaynakları Analiz Portalı
 site_author: Mustafa Kerem Öztaş
 site_url: https://mkoztas.github.io/
@@ -48,8 +48,8 @@ extra_javascript:
 
 nav:
   - Ana Sayfa: index.md
-  - Akademik Çalışmalar: 
-      - Tez Çalışması: docs/tez.md
+  - Çalışmalar: 
+      - YL Tez Çalışması: docs/yltez.md
       - Literatür Özeti: docs/literatur.md
   - Veri Analizi ve Kodlar:
       - Trend ve Kırılma Analizi: docs/kodlar/trend-analizi.md
