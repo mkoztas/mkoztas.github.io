@@ -26,10 +26,10 @@
   </text>
 </svg>  
 
-- ** ## İklim Değişikliği:** Farklı süreli yağış ve sıcaklık zaman serileri trend analizleri (Marmara Bölgesi Örneği)
-- ** ## Hidro-Meteoroloji:** Otokorelasyon düzeltmeli non-parametrik testler (Modified Mann-Kendall, Sen's Slope, Yenilikçi Şen Yöntemi - ITA)
-- **Ekstrem Olaylar ve Kırılma Analizi:** TFPW Pre-whitening, Sequential Mann-Kendall (SQMK) ve durağan olmayan (Non-Stationary) GEV dağılımları
-- **Su Bütçesi ve Kuraklık:** SPEI kuraklık indeksi, Penman-Monteith PET ve Şiddet-Süre-Frekans (IDF) taşkın risk değerlendirmeleri
+- ## **İklim Değişikliği:** Farklı süreli yağış ve sıcaklık zaman serileri trend analizleri (Marmara Bölgesi Örneği)
+- ## **Hidro-Meteoroloji:** Otokorelasyon düzeltmeli non-parametrik testler (Modified Mann-Kendall, Sen's Slope, Yenilikçi Şen Yöntemi - ITA)
+- ## **Ekstrem Olaylar ve Kırılma Analizi:** TFPW Pre-whitening, Sequential Mann-Kendall (SQMK) ve durağan olmayan (Non-Stationary) GEV dağılımları
+- ## **Su Bütçesi ve Kuraklık:** SPEI kuraklık indeksi, Penman-Monteith PET ve Şiddet-Süre-Frekans (IDF) taşkın risk değerlendirmeleri
 
 ---
 
