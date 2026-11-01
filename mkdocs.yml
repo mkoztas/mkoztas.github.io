@@ -57,5 +57,6 @@ nav:
   - Veri Analizi ve Kodlar:
       - Trend ve Kırılma Analizi: docs/kodlar/trend-analizi.md
       - Pre-Whitening (TFPW): docs/kodlar/pre-whitening.md
-      - Google Colab Analiz Alanı: docs/kodlar/colab-analiz.md
+      - Google Colab Analiz Alanı: docs/kodlar/trend_analysis.ipynb
+      - Mathworks Matlab Analiz Alanı: docs/kodlar/trend_analysis_matlab.m
   - İndirilebilir Materyaller: docs/indirmeler.md
