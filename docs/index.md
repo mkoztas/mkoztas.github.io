@@ -1,4 +1,8 @@
-# Mustafa Kerem Öztaş 
+# Mustafa Kerem Öztaş
+<p align="center">
+  <img src="assets/profil.jpg" alt="Mustafa Kerem Öztaş" width="180" style="border-radius: 50%; border: 3px solid #0077B6; margin-top: 10px;">
+</p>
+
 Web sitesi: [Resilience Shift](https://oztas.rs) >> oztas.rs <<
 
 **Pamukkale Üniversitesi Fen Bilimleri Enstitüsü İnşaat Mühendisliği**  
