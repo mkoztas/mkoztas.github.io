@@ -16,7 +16,7 @@ Tez Konusu: "İklim Değişikliğinin Farklı Süreli Yağış ve Sıcaklık Par
 - **Döngüsel Ekonomi:** Yaşam Döngüsü Analizi (LCA / ISO 14040), EPD süreçleri ve kaynak verimliliği
 -->
 ---
-## 🌊 Anahtar Kelimeler  
+<h2 id="Anahtar-Kelimeler" style="display:none;">🌊 Anahtar Kelimeler</h2>  
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 60" width="100%" height="60">
   <defs>
@@ -25,7 +25,7 @@ Tez Konusu: "İklim Değişikliğinin Farklı Süreli Yağış ve Sıcaklık Par
       <stop offset="100%" style="stop-color:#00B4D8;stop-opacity:1" />
     </linearGradient>
   </defs>
-  ## <text x="0" y="42" font-family="'Segoe UI', Roboto, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="url(#grad1)">
+  <text x="0" y="42" font-family="'Segoe UI', Roboto, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="url(#grad1)">
     🌊 Anahtar Kelimeler
   </text>
 </svg>  
