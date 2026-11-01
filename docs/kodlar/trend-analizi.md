@@ -28,4 +28,4 @@ Aşağıdaki sekmelerden tercih ettiğiniz programlama dilini seçerek analiz ko
     % MATLAB Trend Analizi Kodları...
     ```
     [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=mkoztas/mkoztas.github.io&file=docs/kodlar/trend_analysis_matlab.m)
-   * [📥 MATLAB Script Dosyasını İndir (.m)](../../docs/kodlar/trend_analysis_matlab.m)
+    [📥 MATLAB Script Dosyasını İndir (.m)](../../docs/kodlar/trend_analysis_matlab.m)
