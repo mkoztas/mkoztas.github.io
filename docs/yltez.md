@@ -1,6 +1,6 @@
 # MARMARA BÖLGESİ’NDE İKLİM DEĞİŞİKLİĞİ TRENDLERİNİN VE EKSTREM HİDRO-METEOROLOJİK OLAYLARIN ANALİZİ
 ---
-## ÖZET [Literatür Tablosu](../../docs/literatur.md)
+## ÖZET [Literatür Tablosu](../../literatur.md)
 
 İklim değişikliği, küresel ölçekte hidro-meteorolojik döngülerin dengesini bozarak ekstrem hava olaylarının sıklığında, şiddetinde ve mekânsal dağılımında belirgin değişimlere yol açmaktadır. Türkiye'nin nüfus yoğunluğu, sanayi üretimi ve tarımsal faaliyetler açısından en kritik bölgesi olan Marmara Bölgesi, yarı kurak iklim kuşağından Akdeniz geçiş iklimine uzanan hassas ekosistemiyle iklim değişikliğinin olumsuz etkilerine karşı oldukça kırılgan bir yapıdır. 
 
