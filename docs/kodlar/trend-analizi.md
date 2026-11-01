@@ -1,4 +1,4 @@
-# 🌡️ İklim Değişikliği Trend ve Kırılma Analizi
+# İklim Değişikliği Trend ve Kırılma Analizi
 
 Aşağıdaki sekmelerden tercih ettiğiniz programlama dilini seçerek analiz kodlarına ve indirme bağlantılarına ulaşabilirsiniz:
 
