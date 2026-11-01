@@ -36,5 +36,5 @@ Tez Konusu: "İklim Değişikliğinin Farklı Süreli Yağış ve Sıcaklık Par
 
 ---
 
-## 🛠️ Açık Kaynak Kodlar, Colab ve Veri Setleri
+## 🛠️ Açık Kaynak Kodlar, Colab, Matlab ve Veriler
 Çalışmalarımda geliştirdiğim Python ve MATLAB kodlamalarına [Veri Analizi ve Kodlar](kodlar/trend-analizi.md) sekmesinden ulaşabilir, canlı kod simülasyonlarını [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mkoztas/mkoztas.github.io/blob/main/docs/kodlar/trend_analysis.ipynb) veya [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=mkoztas/mkoztas.github.io&file=kodlar/trend_analysis_matlab.m) üzerinden çalıştırabilir ve meta-veri, gerekli açıklama ve sentetik veri setlerini [İndirilebilir Materyaller](indirmeler.md) sayfasından edinebilirsiniz.
