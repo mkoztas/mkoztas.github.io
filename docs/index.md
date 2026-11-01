@@ -17,7 +17,6 @@ Tez Konusu: "İklim Değişikliğinin Farklı Süreli Yağış ve Sıcaklık Par
 -->
 ---
 <h2 id="Anahtar-Kelimeler" style="display:none;">🌊 Anahtar Kelimeler</h2>  
-
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 60" width="100%" height="60">
   <defs>
     <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
