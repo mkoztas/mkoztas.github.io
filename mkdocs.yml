@@ -55,7 +55,7 @@ nav:
       - YL Tez Çalışması: docs/yltez.md
       - Literatür Özeti: docs/literatur.md
   - Veri Analizi ve Kodlar:
-      - Trend ve Kırılma Analizi: docs/kodlar/trend-analizi.md
+      - Trend ve Kırılma Analizi: kodlar/trend-analizi.md
       - Pre-Whitening (TFPW): docs/kodlar/pre-whitening.md
       - Google Colab Analiz Alanı: docs/kodlar/trend_analysis.ipynb
       - Mathworks Matlab Analiz Alanı: docs/kodlar/trend_analysis_matlab.m
