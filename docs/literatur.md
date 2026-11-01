@@ -6,7 +6,7 @@ Bu sayfada; Marmara Bölgesi, Türkiye geneli ve küresel ölçekte yürütülen
 
 ## Literatür Tablosu
 
-Aşağıdaki tablo üzerinden tüm literatür çalışmalarını inceleyebilir, tabloyu doğrudan Google Sheets altyapısı üzerinden güncelleyebilir veya yerleşik kontrol menüsü vasıtasıyla verileri bilgisayarınıza indirebilirsiniz.
+Aşağıdaki tablo üzerinden tüm literatür çalışmalarını inceleyebilir veya yerleşik kontrol menüsü vasıtasıyla verileri bilgisayarınıza indirebilirsiniz.
 
 <div style="position: relative; width: 100%; height: 650px; overflow: hidden; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); margin-top: 20px;">
   <iframe 
