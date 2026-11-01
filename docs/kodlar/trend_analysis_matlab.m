@@ -11,7 +11,7 @@
 
 clear; clc; close all;
 
-%% 1. VERİ İTHALİ VE ÖN İŞLEME (Güvenli Tip Dönüşümü)
+%% 1. VERİ İTHALİ VE ÖN İŞLEME (Dinamik ve Güvenli Tip Dönüşümü)
 default_filename = '20181225BC0F-Aylık Maksimum Sıcaklık (°C).xlsx';
 
 if exist(default_filename, 'file')
@@ -31,9 +31,19 @@ fprintf('Okunan Dosya: %s\n', filename);
 % Excel dosyasını hücre matrisi olarak okuma
 raw_data = readcell(filename);
 
-% Acıpayam İstasyonu satırlarını alma (6:21)
-year_cells = raw_data(6:21, 2);
-month_cells = raw_data(6:21, 3:14);
+% Satır ve Sütun Boyut Kontrolü
+[num_rows, num_cols] = size(raw_data);
+
+% Acıpayam İstasyonu verilerini alma (Satır 6 - 21)
+% Sütun indekslemesini matris genişliğine göre esnek ayarlama:
+if num_cols >= 14
+    year_cells = raw_data(6:21, 2);
+    month_cells = raw_data(6:21, 3:14);
+else
+    % Okuma esnasında ilk boş sütun kırpıldıysa:
+    year_cells = raw_data(6:21, 1);
+    month_cells = raw_data(6:21, 2:13);
+end
 
 % Güvenli sayısal dönüştürme (Metin/Sayı farkını çözer)
 years = zeros(size(year_cells, 1), 1);
