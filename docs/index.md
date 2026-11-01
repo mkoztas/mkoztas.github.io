@@ -25,8 +25,8 @@ Tez Konusu: "İklim Değişikliğinin Farklı Süreli Yağış ve Sıcaklık Par
       <stop offset="100%" style="stop-color:#00B4D8;stop-opacity:1" />
     </linearGradient>
   </defs>
-  <text x="0" y="42" font-family="'Segoe UI', Roboto, Helvetica, sans-serif" font-size="30" font-weight="bold" fill="url(#grad1)">
-    🌊 Anahtar Kelimeler & Uzmanlık Alanları
+  <text x="0" y="42" font-family="'Segoe UI', Roboto, Helvetica, sans-serif" font-size="12" font-weight="bold" fill="url(#grad1)">
+    🌊 Anahtar Kelimeler
   </text>
 </svg>  
 
