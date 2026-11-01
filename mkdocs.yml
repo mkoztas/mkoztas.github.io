@@ -52,7 +52,7 @@ extra_javascript:
 nav:
   - Ana Sayfa: index.md
   - Çalışmalar:
-      - YL Tez Çalışması: kodlar/trend-analizi.md
+      - YL Tez Çalışması: calismalar.md
       - Literatür Özeti: literatur.md
   - Veri Analizi ve Kodlar:
       - Trend ve Kırılma Analizi: kodlar/trend-analizi.md
