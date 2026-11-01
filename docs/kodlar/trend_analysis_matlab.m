@@ -11,17 +11,14 @@
 
 clear; clc; close all;
 
-%% 1. VERİ İTHALİ VE ÖN İŞLEME (MATLAB Online Esnek Dosya Yükleme)
+%% 1. VERİ İTHALİ VE ÖN İŞLEME (Güvenli Tip Dönüşümü)
 default_filename = '20181225BC0F-Aylık Maksimum Sıcaklık (°C).xlsx';
 
-% Dosya geçerli çalışma dizininde var mı kontrol et
 if exist(default_filename, 'file')
     filename = default_filename;
 else
-    % Dosya bulunamazsa kullanıcıya dosya seçtir
     fprintf('Varsayılan dosya bulunamadı. Lütfen analiz edilecek Excel dosyasını seçin...\n');
     [file, path] = uigetfile({'*.xlsx;*.xls', 'Excel Dosyaları (*.xlsx, *.xls)'}, 'MGM Excel Dosyasını Seçin');
-    
     if isequal(file, 0)
         error('HATA: Herhangi bir dosya seçilmedi. İşlem iptal edildi.');
     else
@@ -31,12 +28,34 @@ end
 
 fprintf('Okunan Dosya: %s\n', filename);
 
-% Excel dosyasından ham veriyi okuma
+% Excel dosyasını hücre matrisi olarak okuma
 raw_data = readcell(filename);
 
-% Acıpayam İstasyonu verilerini ayıklama (2003-2018, 16 yıl)
-years = cell2mat(raw_data(6:21, 2));          % Yıllar
-monthly_temps = cell2mat(raw_data(6:21, 3:14)); % 12 aylık maksimumlar
+% Acıpayam İstasyonu satırlarını alma (6:21)
+year_cells = raw_data(6:21, 2);
+month_cells = raw_data(6:21, 3:14);
+
+% Güvenli sayısal dönüştürme (Metin/Sayı farkını çözer)
+years = zeros(size(year_cells, 1), 1);
+for i = 1:length(year_cells)
+    if isnumeric(year_cells{i})
+        years(i) = year_cells{i};
+    else
+        years(i) = str2double(string(year_cells{i}));
+    end
+end
+
+monthly_temps = zeros(size(month_cells));
+for r = 1:size(month_cells, 1)
+    for c = 1:size(month_cells, 2)
+        val = month_cells{r, c};
+        if isnumeric(val) && ~isnan(val)
+            monthly_temps(r, c) = val;
+        else
+            monthly_temps(r, c) = str2double(string(val));
+        end
+    end
+end
 
 % Yıllık ekstrem (maksimum) sıcaklık serisi
 temp_series = max(monthly_temps, [], 2);
