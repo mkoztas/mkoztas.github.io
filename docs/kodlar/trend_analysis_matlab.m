@@ -11,19 +11,30 @@
 
 clear; clc; close all;
 
-%% 1. VERİ İTHALİ VE ÖN İŞLEME
-filename = '20181225BC0F-Aylık Maksimum Sıcaklık (°C).xlsx';
+%% 1. VERİ İTHALİ VE ÖN İŞLEME (MATLAB Online Esnek Dosya Yükleme)
+default_filename = '20181225BC0F-Aylık Maksimum Sıcaklık (°C).xlsx';
 
-if ~exist(filename, 'file')
-    error('HATA: %s dosyası bulunamadı. Lütfen dosya yolunu kontrol edin.', filename);
+% Dosya geçerli çalışma dizininde var mı kontrol et
+if exist(default_filename, 'file')
+    filename = default_filename;
+else
+    % Dosya bulunamazsa kullanıcıya dosya seçtir
+    fprintf('Varsayılan dosya bulunamadı. Lütfen analiz edilecek Excel dosyasını seçin...\n');
+    [file, path] = uigetfile({'*.xlsx;*.xls', 'Excel Dosyaları (*.xlsx, *.xls)'}, 'MGM Excel Dosyasını Seçin');
+    
+    if isequal(file, 0)
+        error('HATA: Herhangi bir dosya seçilmedi. İşlem iptal edildi.');
+    else
+        filename = fullfile(path, file);
+    end
 end
 
+fprintf('Okunan Dosya: %s\n', filename);
+
 % Excel dosyasından ham veriyi okuma
-opts = detectImportOptions(filename);
 raw_data = readcell(filename);
 
 % Acıpayam İstasyonu verilerini ayıklama (2003-2018, 16 yıl)
-% MGM Excel yapısında 6-21 arası satırlar Acıpayam istasyonuna aittir
 years = cell2mat(raw_data(6:21, 2));          % Yıllar
 monthly_temps = cell2mat(raw_data(6:21, 3:14)); % 12 aylık maksimumlar
 
