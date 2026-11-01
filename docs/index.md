@@ -17,7 +17,17 @@ Tez Konusu: "İklim Değişikliğinin Farklı Süreli Yağış ve Sıcaklık Par
 -->
 ---
 ## 🌊 Anahtar Kelimeler
-
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 60" width="100%" height="60">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0077B6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00B4D8;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <text x="0" y="42" font-family="'Segoe UI', Roboto, Helvetica, sans-serif" font-size="30" font-weight="bold" fill="url(#grad1)">
+    🌊 Anahtar Kelimeler & Uzmanlık Alanları
+  </text>
+</svg>
 - **İklim Değişikliği:** Farklı süreli yağış ve sıcaklık zaman serileri trend analizleri (Marmara Bölgesi Örneği)
 - **Hidro-Meteoroloji:** Otokorelasyon düzeltmeli non-parametrik testler (Modified Mann-Kendall, Sen's Slope, Yenilikçi Şen Yöntemi - ITA)
 - **Ekstrem Olaylar ve Kırılma Analizi:** TFPW Pre-whitening, Sequential Mann-Kendall (SQMK) ve durağan olmayan (Non-Stationary) GEV dağılımları
