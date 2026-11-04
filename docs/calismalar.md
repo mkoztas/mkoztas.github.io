@@ -17,7 +17,7 @@
   <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
     <h3>📖 Literatür Özeti</h3>
     <p>İklim değişikliği, trend analizleri, taşkın ve kuraklık riski konularında küresel ve ulusal ölçekte yürütülmüş dinamik literatür tablosu.</p>
-    <a href="../literatur.md" style="font-weight: bold; color: #0077B6;">➡️ Literatür Tablosuna Git </a>
+    <a href="literatur.md" style="font-weight: bold; color: #0077B6;">➡️ Literatür Tablosuna Git </a>
   </div>
 
 </div>
