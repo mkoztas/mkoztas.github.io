@@ -1,4 +1,4 @@
-## Yağış ve Sıcaklık Parametreleriyle İklimsel Trend İncelemesi 
+## Yağış ve Sıcaklık Verileri İklimsel Trend İncelemesi 
 
 **Pamukkale Üniversitesi Fen Bilimleri Enstitüsü İnşaat Mühendisliği**  
 *Hidrolik Anabilim Dalı Prof Dr Ülker GÜNER*  
