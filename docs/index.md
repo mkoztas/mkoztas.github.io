@@ -2,7 +2,7 @@
 
 **Pamukkale Üniversitesi Fen Bilimleri Enstitüsü İnşaat Mühendisliği**  
 *Hidrolik Anabilim Dalı Prof Dr Ülker GÜNER*  
-*Not: Bu kodlar ve algoritmalar Mustafa Kerem Öztaş'ın Pamukkale Üniversitesi'nde yürütmekte olduğu benzer başlıklı yüksek lisans çalışması kapsamında geliştirilmiştir. Lisanslı olup kaynak gösterilmeden kullanılamaz.*
+*Not: Bu kodlar ve algoritmalar Mustafa Kerem Öztaş'ın Pamukkale Üniversitesi'nde yürütmekte olduğu benzer başlıklı yüksek lisans çalışması kapsamında geliştirilmiştir, kaynak gösterilmeden kullanılamaz.*
 
 <!--
 **Uzmanlık:** Sürdürülebilirlik Yönetimi Uzmanı | Çevre Mühendisi | SPK Lisanslı Gayrimenkul Değerleme Uzmanı  
