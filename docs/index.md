@@ -1,7 +1,7 @@
 ## Yağış ve Sıcaklık Parametreleriyle İklimsel Trend İncelemesi 
 
 **Pamukkale Üniversitesi Fen Bilimleri Enstitüsü İnşaat Mühendisliği**  
-*Hidrolik Anabilim Dalı Prof Dr Ülker GÜNER*
+*Hidrolik Anabilim Dalı Prof Dr Ülker GÜNER*  
 *Not: Bu kodlar ve algoritmalar Mustafa Kerem Öztaş'ın Pamukkale Üniversitesi'nde yürütmekte olduğu benzer başlıklı yüksek lisans çalışması kapsamında geliştirilmiştir. Lisanslı olup kaynak gösterilmeden kullanılamaz.*
 
 <!--
