@@ -80,7 +80,7 @@ def kullanicidan_dosya_iste(asama_basligi, beklenen_format, ornek_icerik, dosya_
         print(f"HATA: Geçerli bir '{dosya_uzantisi}' dosyası bulunamadı. Lütfen yolu kontrol edip tekrar deneyin.\n")  
 ```
 
-Adım 3.2: Standart Süreli Yağış Tablolarının (.xlsx) Doğrulanması   
+### Adım 3.2: Standart Süreli Yağış Tablolarının (.xlsx) Doğrulanması   
 Bu adımda klasördeki tüm .xlsx dosyaları okunur; gözlem yılı aralığı, eksik yıl oranı, negatif değer ve süre monotonluğu denetlenerek WMO şartını sağlayan istasyonlar temiz_yagis_serileri sözlüğünde toplanır.
 
 ```python
@@ -120,7 +120,7 @@ if excel_yolu:
     print("WMO Durumu:", "KABUL" if (len(df_standart) >= 30 and eksik_oran < 10) else "RED")
 ```
 
-Adım 3.3: Günlük Yağış Zaman Serilerinin (.txt) İşlenmesi 
+### Adım 3.3: Günlük Yağış Zaman Serilerinin (.txt) İşlenmesi 
 Bu aşamada sisteme günlük zaman serisi .txt dosyası yüklenir. Kod, aylık ve yıllık eksiklik eşiklerini uygulayarak yalnızca WMO standartlarını sağlayan yılları bırakır ve bir sonraki aşama (ETCCDI indeksleri ve yıllık/mevsimlik seriler) için temiz zaman serisi üretir.
 
 ```python
@@ -154,7 +154,7 @@ if yagis_txt_yolu:
     print(f"Günlük Yağış QA/QC Tamamlandı -> WMO Geçerli Yıl Sayısı: {len(gecerli_yillar)}")  
 ```
 
-Adım 3.4: Günlük Sıcaklık Zaman Serilerinin (.txt) İşlenmesi 
+### Adım 3.4: Günlük Sıcaklık Zaman Serilerinin (.txt) İşlenmesi 
 Bu aşamada sisteme günlük zaman serisi .txt dosyası yüklenir. Kod, aylık ve yıllık eksiklik eşiklerini uygulayarak yalnızca WMO standartlarını sağlayan yılları bırakır ve bir sonraki aşama (ETCCDI indeksleri ve yıllık/mevsimlik seriler) için temiz zaman serisi üretir.
 
 ```python
@@ -189,7 +189,7 @@ if sicaklik_txt_yolu:
 ```
 
 
-4. Bir Sonraki Aşamaya (Homojenlik ve TFPW-MK) Aktarım Kuralı  
+## 4. Bir Sonraki Aşamaya (Homojenlik ve TFPW-MK) Aktarım Kuralı  
 QA/QC filtresinden geçen seriler doğrudan trend testine sokulmaz; öncelikle seri bağımlılık (otokorelasyon) kontrolünden geçirilir:
 Homojenlik Testleri (Pettitt, SNHT, Buishand, Von Neumann): Wijngaard vd. (2003) sınıflandırmasına göre en fazla 1 testte kırılma veren (Useful) seriler doğrudan, 2 testte kırılma veren (Doubtful) seriler üstveri kontrolüyle analiz havuzuna alınır.
 Lag-1 Otokorelasyon ($r_1$) hesaplanır ve $\%95$ güven aralığı $\left[\frac{-1 - 1.96\sqrt{n-2}}{n-1},\; \frac{-1 + 1.96\sqrt{n-2}}{n-1}\right]$ ile karşılaştırılır. Güven sınırları dışında kalan anlamlı otokorelasyonlu seriler TFPW (Trend-Free Pre-Whitening) aşamasına yönlendirilir.
