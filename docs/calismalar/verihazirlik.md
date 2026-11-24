@@ -49,131 +49,145 @@ Ham meteorolojik veriler istatistiksel testlere sokulmadan önce aşağıdaki 4 
 
 ## 3. Adım Adım Python QA/QC İş Akışı 
 
-### Adım 3.1: Kütüphanelerin Yüklenmesi ve Dizin Tanımı  
+### Adım 3.1: Kütüphanelerin Yüklenmesi ve Dizin Tanımı 
+
+Etkileşimli (Kullanıcıdan Dosya Talep Eden) Veri Hazırlama Akışı  
+Bu yapıda kod her aşamada durur, kullanıcıya o aşamada tam olarak hangi veriye ihtiyaç duyulduğunu ve dosya içeriğinin nasıl olması gerektiğini ekrana yazar, ardından dosya yolunu (veya Jupyter/Colab yükleme penceresini) bekler.  
 
 ```python
-import glob
 import os
 import numpy as np
 import pandas as pd
 
-# GitHub reposu veya yerel çalışma ortamındaki ham veri klasörleri
-EXCEL_KLASORU = "xxxxx/standart_sureli_yagis/"   # İstasyon bazlı .xlsx dosyaları
-GUNLUK_KLASORU = "xxxxx/gunluk_zaman_serileri/" # Sıcaklık ve günlük yağış .txt dosyaları
+def kullanicidan_dosya_iste(asama_basligi, beklenen_format, ornek_icerik, dosya_uzantisi):
+    """
+    Her aşamada kullanıcıya ne tür bir dosya gerektiğini açıklar ve dosya yolunu alır.
+    """
+    print("=" * 75)
+    print(f"AŞAMA: {asama_basligi}")
+    print("-" * 75)
+    print(f"Beklenen Dosya Türü : {beklenen_format}")
+    print(f"Beklenen İçerik     :\n{ornek_icerik}")
+    print("=" * 75)
+    
+    while True:
+        dosya_yolu = input(f"Lütfen {dosya_uzantisi} dosyasının yolunu girin (Atlamak için 'pas' yazın): ").strip().strip("'\"")
+        if dosya_yolu.lower() == 'pas':
+            return None
+        if os.path.isfile(dosya_yolu) and dosya_yolu.lower().endswith(dosya_uzantisi):
+            print(f"✓ Dosya doğrulandı: {os.path.basename(dosya_yolu)}\n")
+            return dosya_yolu
+        print(f"HATA: Geçerli bir '{dosya_uzantisi}' dosyası bulunamadı. Lütfen yolu kontrol edip tekrar deneyin.\n")  
 ```
+
 Adım 3.2: Standart Süreli Yağış Tablolarının (.xlsx) Doğrulanması   
 Bu adımda klasördeki tüm .xlsx dosyaları okunur; gözlem yılı aralığı, eksik yıl oranı, negatif değer ve süre monotonluğu denetlenerek WMO şartını sağlayan istasyonlar temiz_yagis_serileri sözlüğünde toplanır.
 
 ```python
 SURELER = ['5dk', '10dk', '15dk', '30dk', '1sa', '2sa', '3sa', '4sa', '5sa', '6sa', '8sa', '12sa', '18sa', '24sa']
 
-def standart_sureli_qaqc(dosya_yolu):
-    df_ham = pd.read_excel(dosya_yolu, sheet_name='TABLO', header=None)
-    istasyon_adi = str(df_ham.iloc[1, 0]).replace('METEOROLOJİ İSTASYONU', '').strip()
+ornek_excel = (
+    "  - Sayfa Adı: 'TABLO'\n"
+    "  - 2. Satır (A2): İstasyon Adı (Örn: EDİRNE METEOROLOJİ İSTASYONU)\n"
+    "  - 6. Satırdan itibaren: [Gözlem Yılı | 5dk | 10dk | 15dk | 30dk | 1sa | ... | 24sa] (mm)"
+)
+
+excel_yolu = kullanicidan_dosya_iste(
+    asama_basligi="1. STANDART SÜRELİ MAKSİMUM YAĞIŞ QA/QC ANALİZİ",
+    beklenen_format="MGM Standart Süreli Yağış Excel Dosyası (.xlsx)",
+    ornek_icerik=ornek_excel,
+    dosya_uzantisi=".xlsx"
+)
+
+if excel_yolu:
+    df_ham = pd.read_excel(excel_yolu, sheet_name='TABLO', header=None)
+    istasyon = str(df_ham.iloc[1, 0]).replace('METEOROLOJİ İSTASYONU', '').strip()
     
-    # Gözlem yıllarını ve 14 standart süre sütununu ayıkla
     satirlar = []
     for idx in range(5, len(df_ham)):
         try:
             yil = int(float(df_ham.iloc[idx, 0]))
             if 1900 <= yil <= 2030:
-                degerler = pd.to_numeric(df_ham.iloc[idx, 1:15], errors='coerce').values
-                satirlar.append([yil] + list(degerler))
+                satirlar.append([yil] + list(pd.to_numeric(df_ham.iloc[idx, 1:15], errors='coerce').values))
         except (ValueError, TypeError):
             break
             
-    df = pd.DataFrame(satirlar, columns=['Yil'] + SURELER).sort_values('Yil').reset_index(drop=True)
+    df_standart = pd.DataFrame(satirlar, columns=['Yil'] + SURELER).sort_values('Yil').reset_index(drop=True)
+    eksik_oran = ((df_standart['Yil'].max() - df_standart['Yil'].min() + 1 - len(df_standart)) / 
+                  (df_standart['Yil'].max() - df_standart['Yil'].min() + 1)) * 100
     
-    # WMO 30 yıl ve %10 eksiklik kontrolü
-    baslangic, bitis = df['Yil'].min(), df['Yil'].max()
-    beklenen_yil = bitis - baslangic + 1
-    mevcut_yil = len(df)
-    eksik_yillar = sorted(list(set(range(baslangic, bitis + 1)) - set(df['Yil'])))
-    eksik_oran = (len(eksik_yillar) / beklenen_yil) * 100
-    
-    # Fiziksel tutarlılık: Negatif değer ve Monotonluk (P_i <= P_{i+1})
-    negatif_hata = int((df[SURELER] < 0).sum().sum())
-    monotonluk_hatasi = sum(
-        1 for _, satir in df.iterrows() if np.any(np.diff(satir[SURELER].values) < -1e-6)
-    )
-    
-    # Aşırı uç değer tespiti (Q3 + 3*IQR)
-    uc_deger_sayisi = 0
-    for s in SURELER:
-        q1, q3 = np.percentile(df[s].dropna(), [25, 75])
-        uc_deger_sayisi += int((df[s] > q3 + 3 * (q3 - q1)).sum())
-        
-    karar = "KABUL" if (mevcut_yil >= 30 and eksik_oran < 10.0) else "RED"
-        
-    ozet = {
-        "Istasyon": istasyon_adi,
-        "Periyot": f"{baslangic}-{bitis}",
-        "N_Yil": mevcut_yil,
-        "Eksik_Yil": len(eksik_yillar),
-        "Eksik_Oran_%": round(eksik_oran, 2),
-        "Negatif_Hata": negatif_hata,
-        "Monotonluk_Hatasi": monotonluk_hatasi,
-        "Uc_Deger": uc_deger_sayisi,
-        "WMO_Karar": karar
-    }
-    return ozet, df
-
-qaqc_listesi = []
-temiz_yagis_serileri = {}
-
-for dosya in sorted(glob.glob(os.path.join(EXCEL_KLASORU, "*.xlsx"))):
-    ozet, temiz_df = standart_sureli_qaqc(dosya)
-    qaqc_listesi.append(ozet)
-    if ozet["WMO_Karar"] == "KABUL":
-        temiz_yagis_serileri[ozet["Istasyon"]] = temiz_df
-
-df_qaqc_rapor = pd.DataFrame(qaqc_listesi)
-display(df_qaqc_rapor)
+    print(f"İstasyon: {istasyon} | Yıl Sayısı (N): {len(df_standart)} | Eksik Oran: %{eksik_oran:.2f}")
+    print("WMO Durumu:", "KABUL" if (len(df_standart) >= 30 and eksik_oran < 10) else "RED")
 ```
-Adım 3.3: Günlük Sıcaklık ve Yağış Zaman Serilerinin (.txt) İşlenmesi 
+
+Adım 3.3: Günlük Yağış Zaman Serilerinin (.txt) İşlenmesi 
 Bu aşamada sisteme günlük zaman serisi .txt dosyası yüklenir. Kod, aylık ve yıllık eksiklik eşiklerini uygulayarak yalnızca WMO standartlarını sağlayan yılları bırakır ve bir sonraki aşama (ETCCDI indeksleri ve yıllık/mevsimlik seriler) için temiz zaman serisi üretir.
 
 ```python
-def gunluk_zaman_serisi_qaqc(txt_yolu, parametre="sicaklik"):
-    """
-    Girdi: MGM günlük gözlem .txt dosyası (İstasyon No | Yıl | Ay | Gün | Değer)
-    parametre: 'sicaklik' veya 'yagis'
-    """
-    df = pd.read_csv(txt_yolu, sep="|", encoding="cp1254")
-    df.columns = [c.strip() for c in df.columns]
+ornek_yagis_txt = (
+    "  - Ayraç: Boru işareti '|' (Kodlama: cp1254 veya UTF-8)\n"
+    "  - Sütunlar: İstasyon_No | Yıl | Ay | Gün | Günlük_Toplam_Yağış_mm\n"
+    "  - Örnek Satır: 17050|1965|1|14|12.4"
+)
+
+yagis_txt_yolu = kullanicidan_dosya_iste(
+    asama_basligi="2. GÜNLÜK TOPLAM YAĞIŞ ZAMAN SERİSİ QA/QC ANALİZİ",
+    beklenen_format="MGM Günlük Yağış Zaman Serisi Metin Dosyası (.txt)",
+    ornek_icerik=ornek_yagis_txt,
+    dosya_uzantisi=".txt"
+)
+
+if yagis_txt_yolu:
+    df_yagis = pd.read_csv(yagis_txt_yolu, sep="|", encoding="cp1254")
+    df_yagis.columns = [c.strip() for c in df_yagis.columns]
+    df_yagis['Yagis'] = pd.to_numeric(df_yagis.iloc[:, -1], errors='coerce')
     
-    df['Tarih'] = pd.to_datetime(df[['Yıl', 'Ay', 'Gün']].rename(
-        columns={'Yıl': 'year', 'Ay': 'month', 'Gün': 'day'}
-    ))
-    
-    deger_kolonu = df.columns[-1]
-    df['Deger'] = pd.to_numeric(df[deger_kolonu], errors='coerce')
-    
-    # Fiziksel sınır kontrolü
-    if parametre == "yagis":
-        df.loc[(df['Deger'] < 0) | (df['Deger'] > 500), 'Deger'] = np.nan
-    elif parametre == "sicaklik":
-        df.loc[(df['Deger'] < -45) | (df['Deger'] > 55), 'Deger'] = np.nan
+    # Fiziksel hata ve WMO aylık (>5 gün eksik) / yıllık (<330 gün) filtresi
+    df_yagis.loc[(df_yagis['Yagis'] < 0) | (df_yagis['Yagis'] > 500), 'Yagis'] = np.nan
+    aylik_eksik = df_yagis.groupby(['Yıl', 'Ay'])['Yagis'].apply(lambda x: x.isna().sum())
+    for (y, m) in aylik_eksik[aylik_eksik > 5].index:
+        df_yagis.loc[(df_yagis['Yıl'] == y) & (df_yagis['Ay'] == m), 'Yagis'] = np.nan
         
-    # WMO-No. 100 Aylık Kural: Bir ayda > 5 gün eksik varsa o ayı geçersiz say
-    aylik_eksik = df.groupby(['Yıl', 'Ay'])['Deger'].apply(lambda x: x.isna().sum())
-    for (yil, ay) in aylik_eksik[aylik_eksik > 5].index:
-        df.loc[(df['Yıl'] == yil) & (df['Ay'] == ay), 'Deger'] = np.nan
-        
-    # WMO-No. 100 Yıllık Kural: Yılda en az 330 gün geçerli gözlem şartı (<%10 eksik)
-    yillik_gecerli = df.groupby('Yıl')['Deger'].count()
-    gecerli_yillar = yillik_gecerli[yillik_gecerli >= 330].index.tolist()
-    
-    df_temiz = df[df['Yıl'].isin(gecerli_yillar)].copy()
-    
-    # Minimum 30 yıl kontrolü
-    if len(gecerli_yillar) < 30:
-        print(f"UYARI: {os.path.basename(txt_yolu)} geçerli yıl sayısı ({len(gecerli_yillar)}) < 30 yıl!")
-    else:
-        print(f"BAŞARILI: {os.path.basename(txt_yolu)} -> {len(gecerli_yillar)} geçerli yıl analize hazır.")
-        
-    return df_temiz
+    gecerli_yillar = df_yagis.groupby('Yıl')['Yagis'].count()
+    gecerli_yillar = gecerli_yillar[gecerli_yillar >= 330].index.tolist()
+    df_yagis_temiz = df_yagis[df_yagis['Yıl'].isin(gecerli_yillar)].copy()
+    print(f"Günlük Yağış QA/QC Tamamlandı -> WMO Geçerli Yıl Sayısı: {len(gecerli_yillar)}")  
 ```
+
+Adım 3.4: Günlük Sıcaklık Zaman Serilerinin (.txt) İşlenmesi 
+Bu aşamada sisteme günlük zaman serisi .txt dosyası yüklenir. Kod, aylık ve yıllık eksiklik eşiklerini uygulayarak yalnızca WMO standartlarını sağlayan yılları bırakır ve bir sonraki aşama (ETCCDI indeksleri ve yıllık/mevsimlik seriler) için temiz zaman serisi üretir.
+
+```python
+ornek_sicaklik_txt = (
+    "  - Ayraç: Boru işareti '|' (Kodlama: cp1254 veya UTF-8)\n"
+    "  - Sütunlar: İstasyon_No | Yıl | Ay | Gün | Sıcaklık_C (Ortalama, Maksimum veya Minimum)\n"
+    "  - Örnek Satır: 17050|1965|1|14|4.8"
+)
+
+sicaklik_txt_yolu = kullanicidan_dosya_iste(
+    asama_basligi="3. GÜNLÜK SICAKLIK ZAMAN SERİSİ QA/QC ANALİZİ",
+    beklenen_format="MGM Günlük Sıcaklık Zaman Serisi Metin Dosyası (.txt)",
+    ornek_icerik=ornek_sicaklik_txt,
+    dosya_uzantisi=".txt"
+)
+
+if sicaklik_txt_yolu:
+    df_sic = pd.read_csv(sicaklik_txt_yolu, sep="|", encoding="cp1254")
+    df_sic.columns = [c.strip() for c in df_sic.columns]
+    df_sic['Sicaklik'] = pd.to_numeric(df_sic.iloc[:, -1], errors='coerce')
+    
+    # Fiziksel sınır (-45°C ile +55°C) ve WMO aylık/yıllık kontrol
+    df_sic.loc[(df_sic['Sicaklik'] < -45) | (df_sic['Sicaklik'] > 55), 'Sicaklik'] = np.nan
+    aylik_eksik = df_sic.groupby(['Yıl', 'Ay'])['Sicaklik'].apply(lambda x: x.isna().sum())
+    for (y, m) in aylik_eksik[aylik_eksik > 5].index:
+        df_sic.loc[(df_sic['Yıl'] == y) & (df_sic['Ay'] == m), 'Sicaklik'] = np.nan
+        
+    gecerli_yillar_sic = df_sic.groupby('Yıl')['Sicaklik'].count()
+    gecerli_yillar_sic = gecerli_yillar_sic[gecerli_yillar_sic >= 330].index.tolist()
+    df_sic_temiz = df_sic[df_sic['Yıl'].isin(gecerli_yillar_sic)].copy()
+    print(f"Günlük Sıcaklık QA/QC Tamamlandı -> WMO Geçerli Yıl Sayısı: {len(gecerli_yillar_sic)}")
+```
+
 
 4. Bir Sonraki Aşamaya (Homojenlik ve TFPW-MK) Aktarım Kuralı  
 QA/QC filtresinden geçen seriler doğrudan trend testine sokulmaz; öncelikle seri bağımlılık (otokorelasyon) kontrolünden geçirilir:
