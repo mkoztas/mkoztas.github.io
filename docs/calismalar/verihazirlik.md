@@ -16,6 +16,7 @@ meta:
 <a href="https://colab.research.google.com/github/mkoztas/mkoztas.github.io/blob/main/docs/notebooks/verihazirlik.ipynb" target="_blank" rel="noopener">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>  
+   
 Bu bölümde, Meteoroloji Genel Müdürlüğü'nden (MGM) temin edilen ham gözlem verilerinin iklim değişikliği trend analizlerine (Homojenlik, TFPW-MK ve SQMK) hazır hale getirilmesi için uygulanan **Kalite Güvencesi ve Kalite Kontrolü (QA/QC)** adımları ile Python veri işleme akışı yer almaktadır.
 
 ---
