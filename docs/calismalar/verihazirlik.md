@@ -47,9 +47,9 @@ Ham meteorolojik veriler istatistiksel testlere sokulmadan önce aşağıdaki 4 
 
 ---
 
-## 3. Adım Adım Python QA/QC İş Akışı
+## 3. Adım Adım Python QA/QC İş Akışı 
 
-### Adım 3.1: Kütüphanelerin Yüklenmesi ve Dizin Tanımı
+### Adım 3.1: Kütüphanelerin Yüklenmesi ve Dizin Tanımı  
 
 ```python
 import glob
@@ -61,7 +61,7 @@ import pandas as pd
 EXCEL_KLASORU = "data/standart_sureli_yagis/"   # İstasyon bazlı .xlsx dosyaları
 GUNLUK_KLASORU = "data/gunluk_zaman_serileri/" # Sıcaklık ve günlük yağış .txt dosyaları
 ```
-Adım 3.2: Standart Süreli Yağış Tablolarının (.xlsx) Doğrulanması
+Adım 3.2: Standart Süreli Yağış Tablolarının (.xlsx) Doğrulanması   
 Bu adımda klasördeki tüm .xlsx dosyaları okunur; gözlem yılı aralığı, eksik yıl oranı, negatif değer ve süre monotonluğu denetlenerek WMO şartını sağlayan istasyonlar temiz_yagis_serileri sözlüğünde toplanır.
 
 ```python
@@ -130,7 +130,7 @@ for dosya in sorted(glob.glob(os.path.join(EXCEL_KLASORU, "*.xlsx"))):
 df_qaqc_rapor = pd.DataFrame(qaqc_listesi)
 display(df_qaqc_rapor)
 ```
-Adım 3.3: Günlük Sıcaklık ve Yağış Zaman Serilerinin (.txt) İşlenmesi
+Adım 3.3: Günlük Sıcaklık ve Yağış Zaman Serilerinin (.txt) İşlenmesi 
 Bu aşamada sisteme günlük zaman serisi .txt dosyası yüklenir. Kod, aylık ve yıllık eksiklik eşiklerini uygulayarak yalnızca WMO standartlarını sağlayan yılları bırakır ve bir sonraki aşama (ETCCDI indeksleri ve yıllık/mevsimlik seriler) için temiz zaman serisi üretir.
 
 ```python
@@ -175,7 +175,7 @@ def gunluk_zaman_serisi_qaqc(txt_yolu, parametre="sicaklik"):
     return df_temiz
 ```
 
-4. Bir Sonraki Aşamaya (Homojenlik ve TFPW-MK) Aktarım Kuralı
+4. Bir Sonraki Aşamaya (Homojenlik ve TFPW-MK) Aktarım Kuralı  
 QA/QC filtresinden geçen seriler doğrudan trend testine sokulmaz; öncelikle seri bağımlılık (otokorelasyon) kontrolünden geçirilir:
 Homojenlik Testleri (Pettitt, SNHT, Buishand, Von Neumann): Wijngaard vd. (2003) sınıflandırmasına göre en fazla 1 testte kırılma veren (Useful) seriler doğrudan, 2 testte kırılma veren (Doubtful) seriler üstveri kontrolüyle analiz havuzuna alınır.
 Lag-1 Otokorelasyon ($r_1$) hesaplanır ve $\%95$ güven aralığı $\left[\frac{-1 - 1.96\sqrt{n-2}}{n-1},\; \frac{-1 + 1.96\sqrt{n-2}}{n-1}\right]$ ile karşılaştırılır. Güven sınırları dışında kalan anlamlı otokorelasyonlu seriler TFPW (Trend-Free Pre-Whitening) aşamasına yönlendirilir.
