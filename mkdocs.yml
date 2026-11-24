@@ -53,6 +53,7 @@ nav:
   - Ana Sayfa: index.md
   - Çalışmalar:
       - Genel Bakış: calismalar.md
+      - Veri Hazırlığı: verihazirlik.md
       - Yöntem ve Türetilmiş Veri: metodoveri.md
       - Literatür Listesi: literatur.md
   - Veri Analizi ve Kodlar:
