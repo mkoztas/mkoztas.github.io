@@ -1,4 +1,4 @@
----
+
 search:
   exclude: true
 meta:
@@ -8,7 +8,7 @@ meta:
     content: noindex, nofollow, noarchive
   - name: bingbot
     content: noindex, nofollow, noarchive
----
+
 <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
 <meta name="googlebot" content="noindex, nofollow, noarchive">
 
