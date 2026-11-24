@@ -1,3 +1,17 @@
+---
+search:
+  exclude: true
+meta:
+  - name: robots
+    content: noindex, nofollow, noarchive, noimageindex
+  - name: googlebot
+    content: noindex, nofollow, noarchive
+  - name: bingbot
+    content: noindex, nofollow, noarchive
+---
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive">
+
 site_name: Mustafa Kerem Öztaş | Portfolyo
 site_description: İklim Değişikliği, Hidro-Meteoroloji ve Su Kaynakları Analiz Portalı
 site_author: Mustafa Kerem Öztaş
