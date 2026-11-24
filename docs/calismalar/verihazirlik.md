@@ -58,8 +58,8 @@ import numpy as np
 import pandas as pd
 
 # GitHub reposu veya yerel çalışma ortamındaki ham veri klasörleri
-EXCEL_KLASORU = "data/standart_sureli_yagis/"   # İstasyon bazlı .xlsx dosyaları
-GUNLUK_KLASORU = "data/gunluk_zaman_serileri/" # Sıcaklık ve günlük yağış .txt dosyaları
+EXCEL_KLASORU = "xxxxx/standart_sureli_yagis/"   # İstasyon bazlı .xlsx dosyaları
+GUNLUK_KLASORU = "xxxxx/gunluk_zaman_serileri/" # Sıcaklık ve günlük yağış .txt dosyaları
 ```
 Adım 3.2: Standart Süreli Yağış Tablolarının (.xlsx) Doğrulanması   
 Bu adımda klasördeki tüm .xlsx dosyaları okunur; gözlem yılı aralığı, eksik yıl oranı, negatif değer ve süre monotonluğu denetlenerek WMO şartını sağlayan istasyonlar temiz_yagis_serileri sözlüğünde toplanır.
