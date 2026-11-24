@@ -180,7 +180,7 @@ QA/QC filtresinden geçen seriler doğrudan trend testine sokulmaz; öncelikle s
 Homojenlik Testleri (Pettitt, SNHT, Buishand, Von Neumann): Wijngaard vd. (2003) sınıflandırmasına göre en fazla 1 testte kırılma veren (Useful) seriler doğrudan, 2 testte kırılma veren (Doubtful) seriler üstveri kontrolüyle analiz havuzuna alınır.
 Lag-1 Otokorelasyon ($r_1$) hesaplanır ve $\%95$ güven aralığı $\left[\frac{-1 - 1.96\sqrt{n-2}}{n-1},\; \frac{-1 + 1.96\sqrt{n-2}}{n-1}\right]$ ile karşılaştırılır. Güven sınırları dışında kalan anlamlı otokorelasyonlu seriler TFPW (Trend-Free Pre-Whitening) aşamasına yönlendirilir.
 
- ```python
+ ```python  
 def tfpw_secim_kontrolu(seri):
     x = np.asarray(seri, dtype=float)
     n = len(x)
@@ -198,7 +198,7 @@ for istasyon, df in temiz_yagis_serileri.items():
         if gerekli:
             tfpw_adaylari.append({"Istasyon": istasyon, "Parametre": s, "r1": r1_val, "Yontem": "TFPW-MK"})
 
-display(pd.DataFrame(tfpw_adaylari))
+display(pd.DataFrame(tfpw_adaylari))  
 ```
 
 
