@@ -25,8 +25,8 @@ Analiz hattında iki farklı zaman ölçeğinde ve formatta ham veri seti kullan
 | Veri Seti Türü | Dosya Formatı | Gerekli Dosya İçeriği ve Sütun Yapısı | Kullanım Amacı |
 | :--- | :---: | :--- | :--- |
 | **Standart Süreli Maksimum Yağışlar** | `.xlsx` | MGM `TABLO` sayfası formatı. İlk sütunda **Gözlem Yılı**, devam eden 14 sütunda **5, 10, 15, 30 dk** ve **1, 2, 3, 4, 5, 6, 8, 12, 18, 24 saatlik** maksimum yağış değerleri ($\text{mm}$). | Kısa ve orta süreli ekstrem yağış şiddeti (IDF) ve konvektif yağış trendlerinin analizi. |
-| **Günlük Sıcaklık ve Toplam Yağış Zaman Serileri** | `.txt` | MGM boru (`|`) ayraçlı metin dosyası (`cp1254` veya `UTF-8`). Sütunlar: `İstasyon No | Yıl | Ay | Gün | Parametre Değeri` ($T_{\text{ort}}, T_{\max}, T_{\min}$ [$^\circ\text{C}$] veya Toplam Yağış [$\text{mm}$]). | Çok günlük yağış ($Rx1day, Rx5day$), kuraklık ($CDD$), sıcaklık indeksleri ($WSDI, SU, TR$) ve mevsimsel/yıllık ortalamaların türetilmesi. |
-| **İstasyon Üstveri (Metadata) Dosyası** | `.txt` / `.csv` | `İstasyon No | İstasyon Adı | İl | İlçe | Enlem | Boylam | Rakım` bilgilerini içeren referans tablosu. | Mekânsal haritalama (QGIS/Matplotlib) ve istasyon tarihçesi (yer/cihaz değişikliği) kontrolü. |
+| **Günlük Sıcaklık ve Toplam Yağış Zaman Serileri** | `.txt` | MGM boru ayraçlı metin dosyası (cp1254 veya UTF-8). Sütunlar: İstasyon No - Yıl - Ay - Gün - Parametre Değeri ($T_{\text{ort}}, T_{\max}, T_{\min}$ [$^\circ\text{C}$] veya Toplam Yağış [$\text{mm}$]). | Çok günlük yağış ($Rx1day, Rx5day$), kuraklık ($CDD$), sıcaklık indeksleri ($WSDI, SU, TR$) ve mevsimsel/yıllık ortalamaların türetilmesi. |
+| **İstasyon Üstveri (Metadata) Dosyası** | .txt veya .csv | İstasyon No - İstasyon Adı - İl - İlçe - Enlem - Boylam - Rakım bilgilerini içeren referans tablosu. | Mekânsal haritalama (QGIS/Matplotlib) ve istasyon tarihçesi (yer/cihaz değişikliği) kontrolü. |
 
 > **Önemli Metodolojik Not:** İklim değişikliği trend analizlerinde yağış ve sıcaklık zaman serileri istatistiksel olarak birbirinden **bağımsız (tek değişkenli)** şekilde analiz edilir. Bir istasyonun analize dahil edilebilmesi için hem sıcaklık hem yağış verisinin aynı anda bulunması zorunlu değildir; her parametre kendi istasyon havuzunda WMO kriterlerine göre değerlendirilir.
 
@@ -36,7 +36,7 @@ Analiz hattında iki farklı zaman ölçeğinde ve formatta ham veri seti kullan
 
 Ham meteorolojik veriler istatistiksel testlere sokulmadan önce aşağıdaki 4 temel eleme kuralından geçirilir:
 
-1. **Minimum Gözlem Süresi ($N \ge 30$ Yıl):** Dünya Meteoroloji Örgütü (**WMO-No. 1203**, *Guidelines on the Calculation of Climate Normals*) uyarınca atmosferik doğal salınımların (NAO, ENSO vb.) uzun dönemli iklim trendiyle karışmaması için en az 30 yıllık veri şarttır. *(Örn: $N=10$ yıllık İstanbul-Kartal istasyonu bu aşamada elenir).*
+1. **Minimum Gözlem Süresi ($N \ge 30$ Yıl):** Dünya Meteoroloji Örgütü (**WMO-No. 1203**, *Guidelines on the Calculation of Climate Normals*) uyarınca atmosferik doğal salınımların (NAO, ENSO vb.) uzun dönemli iklim trendiyle karışmaması için en az 30 yıllık veri şarttır. *(Örn: yeni kurulmuş $N=3$ yıllık İstanbul-X istasyonu bu aşamada elenir).*
 2. **Eksik Veri Toleransı ($<\%10$ Kuralı):** **WMO-No. 100** (*Guide to Climatological Practices*) ve **Klein Tank vd. (2002)** standartlarına göre:
    * Yıllık serilerde eksik yıl oranı **%10'un altında** olmalıdır.
    * Günlük zaman serilerinde bir ayda **5 günden fazla** eksik veri varsa o ay geçersiz (`NaN`) sayılır; bir yılda geçerli gün sayısı **330 günün altındaysa** o yıl yıllık/mevsimlik indeks hesabına dahil edilmez.
