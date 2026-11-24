@@ -1,0 +1,43 @@
+import io
+import numpy as np
+import pandas as pd
+from google.colab import files
+from IPython.display import display, Markdown
+
+def colab_dosya_yukle(asama_basligi, beklenen_format, ornek_icerik, uzanti):
+    display(Markdown(f"### {asama_basligi}"))
+    print(f"Beklenen Dosya : {beklenen_format}")
+    print(f"Beklenen İçerik:\n{ornek_icerik}\n")
+    
+    secim = input(f"Bu aşama için '{uzanti}' dosyası yüklemek istiyor musunuz? (e/h): ").strip().lower()
+    if secim != 'e':
+        print("→ Bu aşama atlandı.\n")
+        return None, None
+        
+    yuklenen = files.upload()  # Tarayıcıda doğrudan dosya seçme penceresi açar
+    if not yuklenen:
+        return None, None
+        
+    dosya_adi = list(yuklenen.keys())[0]
+    if not dosya_adi.lower().endswith(uzanti):
+        print(f"HATA: Beklenen uzantı '{uzanti}', yüklenen '{dosya_adi}'.")
+        return None, None
+        
+    print(f"✓ Yüklendi: {dosya_adi}\n")
+    return dosya_adi, io.BytesIO(yuklenen[dosya_adi])
+
+# Örnek Kullanım (1. Aşama: Standart Süreli Excel)
+dosya_adi, dosya_icerik = colab_dosya_yukle(
+    asama_basligi="1. Aşama: Standart Süreli Maksimum Yağış QA/QC (.xlsx)",
+    beklenen_format="MGM Standart Süreli Yağış Tablosu (.xlsx)",
+    ornek_icerik="- Sayfa Adı: 'TABLO'\n- Sütunlar: Gözlem Yılı | 5dk | 10dk | ... | 24sa",
+    uzanti=".xlsx"
+)
+
+if dosya_icerik:
+    df_ham = pd.read_excel(dosya_icerik, sheet_name='TABLO', header=None)
+    print("Veri başarıyla okundu! İlk 5 yıl:")
+    display(df_ham.iloc[5:10, :15])
+
+# Analiz sonunda kullanıcıyı dokümantasyon sayfasına geri yönlendiren bağlantı
+display(Markdown("---\n**[← Dokümantasyon Sayfasına Geri Dön (mkoztas.github.io)](https://mkoztas.github.io/calismalar/verihazirlik/)**\n*(Not: Sekmeyi kapattığınızda da doğrudan dokümantasyon sayfanızda kalırsınız.)*"))
